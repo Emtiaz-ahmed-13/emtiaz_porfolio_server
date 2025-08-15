@@ -5,14 +5,14 @@ import app from "./app";
 dotenvConfig();
 
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.DATABASE_URL;
+const database_url = process.env.DATABASE_URL;
 
-if (!MONGODB_URI) {
+if (!database_url) {
   throw new Error("DATABASE_URL is not defined");
 }
 
 async function connectDB() {
-  await mongoose.connect(MONGODB_URI!, {
+  await mongoose.connect(database_url!, {
     serverSelectionTimeoutMS: 30000,
     socketTimeoutMS: 45000,
   });
