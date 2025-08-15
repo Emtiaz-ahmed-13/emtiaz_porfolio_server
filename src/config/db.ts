@@ -1,13 +1,10 @@
-import mongoose from "mongoose";
+import dotenv from "dotenv";
+import path from "path";
 
-export async function connectDB() {
-  const uri = process.env.MONGODB_URI;
-  if (!uri) {
-    throw new Error("MONGODB_URI is not set");
-  }
-  mongoose.set("strictQuery", true);
-  await mongoose.connect(uri, {
-    dbName: process.env.DB_NAME || "portfolio",
-  });
-  console.log("MongoDB connected");
-}
+dotenv.config({ path: path.join(process.cwd(), ".env") });
+
+export default {
+  NODE_ENV: process.env.NODE_ENV || "development",
+  port: process.env.PORT || 3000,
+  database_url: process.env.DATABASE_URL,
+};

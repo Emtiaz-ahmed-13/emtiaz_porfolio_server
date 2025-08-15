@@ -1,33 +1,27 @@
-import http from "http";
+import { config as dotenvConfig } from "dotenv";
+import mongoose from "mongoose";
 import app from "./app";
-import { connectDB } from "./config/db";
 
-const PORT = parseInt(process.env.PORT || "4000", 10);
+dotenvConfig();
 
-let isConnected = false;
+const PORT = process.env.PORT || 3000;
+const MONGODB_URI = process.env.MONGODB_URI;
 
-async function init() {
-  if (!isConnected) {
-    try {
-      await connectDB();
-      isConnected = true;
-      console.log("✅ Database connected");
-    } catch (err) {
-      console.error("❌ Database connection failed:", err);
-      process.exit(1);
-    }
+if (!MONGODB_URI) {
+  throw new Error("MONGODB_URI is not defined in the environment variables");
+}
+
+async function server() {
+  try {
+    await mongoose.connect(MONGODB_URI as string);
+    console.log("Connected to MongoDB");
+
+    app.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to start server:", error);
   }
 }
 
-if (process.env.VERCEL) {
-  // Vercel serverless handler
-} else {
-  // Local development
-  (async () => {
-    await init();
-    const server = http.createServer(app);
-    server.listen(PORT, () => {
-      console.log(`🚀 Server listening on port ${PORT}`);
-    });
-  })();
-}
+server();
