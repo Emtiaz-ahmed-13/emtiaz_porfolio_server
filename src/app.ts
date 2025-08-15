@@ -1,7 +1,7 @@
 import compression from "compression";
 import cors from "cors";
 import dotenv from "dotenv";
-import express from "express";
+import express, { Request, Response } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import { errorHandler, notFoundHandler } from "./middlewares/error";
@@ -18,7 +18,7 @@ app.use(compression());
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/health", (_req, res) => {
+app.get("/health", (_req: Request, res: Response) => {
   res.json({ status: "ok", env: process.env.NODE_ENV || "development" });
 });
 
