@@ -15,12 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.get("/", (_req: Request, res: Response) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("🚀 emtiaz's porfolio server  is running.");
-});
-
-app.get("/health", (_req: Request, res: Response) => {
-  res.json({ status: "ok", env: process.env.NODE_ENV || "development" });
 });
 
 app.use("/api/v1", router);
