@@ -1,37 +1,39 @@
 {
   "name": "emtiaz_portfolio_server",
   "version": "1.0.0",
-  "main": "src/server.ts",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
-    "start": "node src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emtiaz-ahmed-13/emtiaz_porfolio_server.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
-  "description": "",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Emtiaz-ahmed-13/emtiaz_porfolio_server/issues"
+  },
+  "homepage": "https://github.com/Emtiaz-ahmed-13/emtiaz_porfolio_server#readme",
   "dependencies": {
-    "compression": "^1.8.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "mongoose": "^8.17.1",
-    "morgan": "^1.10.1",
     "nodemailer": "^7.0.5"
   },
   "devDependencies": {
-    "@types/compression": "^1.8.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
-    "@types/helmet": "^0.0.48",
-    "@types/morgan": "^1.9.10",
-    "@types/node": "^24.2.1",
+    "@types/node": "^24.3.0",
     "@types/nodemailer": "^7.0.0",
-    "@vercel/node": "^5.3.13",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.2"
   }

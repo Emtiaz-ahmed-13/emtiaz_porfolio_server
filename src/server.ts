@@ -19,7 +19,6 @@ async function connectDB() {
   console.log("🟢 Connected to MongoDB");
 }
 
-// Bootstrap the server
 async function bootstrap() {
   try {
     await connectDB();
