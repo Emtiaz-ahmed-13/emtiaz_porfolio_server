@@ -4,7 +4,6 @@ import { connectDB } from "./config/db";
 
 const PORT = parseInt(process.env.PORT || "4000", 10);
 
-// Avoid reconnecting DB multiple times in Vercel
 let isConnected = false;
 
 async function init() {
@@ -21,9 +20,9 @@ async function init() {
 }
 
 if (process.env.VERCEL) {
-  // Vercel Serverless Entry
+  // Vercel serverless handler
 } else {
-  // Local Development Entry
+  // Local development
   (async () => {
     await init();
     const server = http.createServer(app);
