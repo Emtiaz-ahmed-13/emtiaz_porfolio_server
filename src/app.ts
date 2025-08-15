@@ -1,9 +1,7 @@
-import compression from "compression";
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 import helmet from "helmet";
-import morgan from "morgan";
 import { errorHandler, notFoundHandler } from "./middlewares/error";
 import router from "./routes";
 
@@ -13,13 +11,12 @@ const app = express();
 
 app.use(helmet());
 app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
-app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
-app.use(compression());
-app.use(express.json({ limit: "1mb" }));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Routes
 app.get("/", (_req: Request, res: Response) => {
-  res.send("🚀 API is running. Visit /api/v1 for endpoints.");
+  res.send("🚀 emtiaz's porfolio server  is running.");
 });
 
 app.get("/health", (_req: Request, res: Response) => {

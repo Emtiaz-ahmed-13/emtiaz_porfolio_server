@@ -5,23 +5,31 @@ import app from "./app";
 dotenvConfig();
 
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.DATABASE_URL;
 
 if (!MONGODB_URI) {
-  throw new Error("MONGODB_URI is not defined in the environment variables");
+  throw new Error("DATABASE_URL is not defined");
 }
 
-async function server() {
+async function connectDB() {
+  await mongoose.connect(MONGODB_URI!, {
+    serverSelectionTimeoutMS: 30000,
+    socketTimeoutMS: 45000,
+  });
+  console.log("🟢 Connected to MongoDB");
+}
+
+// Bootstrap the server
+async function bootstrap() {
   try {
-    await mongoose.connect(MONGODB_URI as string);
-    console.log("Connected to MongoDB");
+    await connectDB();
 
     app.listen(PORT, () => {
-      console.log(`Server listening on port ${PORT}`);
+      console.log(`🚀 Server running on port ${PORT}`);
     });
-  } catch (error) {
-    console.error("Failed to start server:", error);
+  } catch (err) {
+    console.error("❌ Server startup failed:", err);
   }
 }
 
-server();
+bootstrap();
