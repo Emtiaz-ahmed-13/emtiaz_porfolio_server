@@ -17,7 +17,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send("🚀 emtiaz's portfolio server is running.");
 });
 
-app.use("/api/v1", router);
+app.use("/api", router);
 
 // Error handlers
 app.use(notFoundHandler);
